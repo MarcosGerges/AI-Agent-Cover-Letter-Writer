@@ -12,4 +12,9 @@ pip install pyautogen
 
 pip install strealit
 
-In addition you'll need to create a virtual environment for your libraries
+In addition, you'll need to create a virtual environment for your libraries
+
+
+Final words:
+
+This is only an example of what can be done. Feel free to experiment with the prompts if you want your agent to do something else. Have fun!
