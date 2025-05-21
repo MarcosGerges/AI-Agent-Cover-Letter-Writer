@@ -7,7 +7,9 @@ Necessary Packages:
 For this project, you'll need to copy the following commands and install these packages:
 
 pip install openai
+
 pip install pyautogen
+
 pip install strealit
 
 In addition you'll need to create a virtual environment for your libraries
