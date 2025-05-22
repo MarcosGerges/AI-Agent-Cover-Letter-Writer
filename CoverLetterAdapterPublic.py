@@ -1,5 +1,8 @@
 import autogen
 import streamlit as st
+import os
+from docx import Document
+import docx2pdf
 
 llm_config ={
     "model": "gpt-4o-mini",
@@ -157,16 +160,26 @@ critic.register_nested_chats(
 
 if start_Button is True:
     with st.spinner("Agents working on the document...."):
-        chat_results=autogen.initiate_chats(
-           [
-               {
-                 "sender":critic,
-                 "recipient":writer,
-                 "message":writer_prompt[0],
-                 "max_turns":2,
-                 "summary_method":"last_msg",
-               },
-           ]
+        chat_results = autogen.initiate_chats(
+            [
+                {
+                    "sender": critic,
+                    "recipient": writer,
+                    "message": writer_prompt[0],
+                    "max_turns": 2,
+                    "summary_method": "last_msg",
+                },
+            ]
         )
+        st.write(chat_results[-1].chat_history[-1]["content"]) 
 
-st.markdown(chat_results[-1].chat_history[-1]["content"])
+data = st.text_area("Paste Here")
+if data:
+    os.system('cp Cover_Letter_Blank.docx Cover_Letter_AI.docx')
+    doc = Document('Cover_Letter_AI.docx')
+    doc.add_paragraph(data)
+    doc.save('Cover_Letter_AI.docx')
+    os.system('docx2pdf Cover_Letter_AI.docx')
+    os.system('mv Cover_Letter_AI.pdf "Your_directory_Here"')
+    os.system('rm Cover_Letter_AI.docx')
+
